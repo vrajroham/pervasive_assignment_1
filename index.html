@@ -1,0 +1,113 @@
+<html>
+  <head>
+   <title>Pizza Center</title>
+  </head>
+  <body bgcolor="black">
+	<font color="white"><center><h1>Welcome to VRaJ's Pizza Shop</h1></center>
+	<hr width="40%">
+       <form action="step1.jsp" method="post" name="order" accept-charset=utf-8>
+	<div style="margin-left:100px;">
+	 
+	  <h3>Select Menu
+	  <select name="menu" id="mainmenu">
+	  </select></h3>
+	  <hr width="30%" align="left">
+	  <input type="button" id="cart" style="margin-left:180px;" onClick="additem('items')" value="Add to Cart">
+		<input type="button" style="" onClick="totalBill('items')" value="Checkout">
+	</div>
+	<div style="margin-left:100px;">
+	<h3>Selected Menu Items</h3>
+	<table border=0 width="50%" cellspacing=10 cellpading=6 id="items">
+		<tr bgcolor="brown">
+			<th width="10%"></th>
+			<th width="65%"><font color="white">Item Name</font></th>
+			<th width="25%"><font color="white">Item Price</font></th>
+		</tr>
+	</table>
+    <input type="hidden" name="items" id="itemlist">
+    <input type="hidden" name="price" id="itempricelist">
+    <input type="hidden" name="total" id="ptotal">
+	<input type=submit value="Next Step" id="nextstep" disabled>
+	</div>
+	</form>
+	</font>
+	<script language="javascript">
+		document.getElementById("mainmenu").innerHTML="<option value='100'>vv</option><option value='200'>vv</option>";
+		var total=0;
+		var itemname=new Array();
+		var itemprice=new Array();
+		function additem(tableID) {
+			var sel = document.forms['order'].elements['menu'];
+			var val = sel.value;
+			if(sel.value!="no"){
+			var table = document.getElementById(tableID);
+			var rowCount = table.rows.length;
+			var row = table.insertRow(rowCount);
+
+			var cell1 = row.insertCell(0);
+			var element1 = document.createElement("input");
+			element1.type = "checkbox";
+			element1.name="chkbox[]";
+			cell1.appendChild(element1);
+
+			var cell2 = row.insertCell(1);
+			var element3 = document.createElement("label");
+			element3.type = "label";
+			element3.id= "iname";
+			element3.name = "itemname[]";
+			itemname.push(sel.options[sel.selectedIndex].text);
+			element3.innerHTML="<center><b><font color=white>" + sel.options[sel.selectedIndex].text;
+			cell2.appendChild(element3);
+
+			var cell3 = row.insertCell(2);
+			var element2 = document.createElement("label");
+			element2.type = "label";
+			element2.id = "iprice";
+			element2.name = "itemprice[]";
+			element2.innerHTML="<center><b><font color=white>Rs : " + sel.value;
+			cell3.appendChild(element2);
+			itemprice.push(sel.value);
+			total=Number(total)+Number(sel.value);
+		      }
+		    else{
+				alert("Please select Menu");
+			}
+		}
+		function totalBill(tableID){
+			var table = document.getElementById(tableID);
+			var rowCount = table.rows.length;
+			row = table.insertRow(rowCount);
+			row.insertCell(0);
+			row.insertCell(1);
+			cell1 = row.insertCell(2);
+			cell1.bgColor="brown";
+	        cell1.innerHTML="<font color=white><center><b> Total : "+total;
+			document.getElementById("cart").value="Loading..";
+			document.getElementById("cart").disabled = true;
+			console.log("Item Names : "+itemname);
+			console.log("Item Price : "+itemprice);
+			document.getElementById("itemlist").value=itemname;
+			document.getElementById("itempricelist").value=itemprice;
+			document.getElementById("ptotal").value=total;
+			document.getElementById("nextstep").disabled=false;
+		}
+		if (window.XMLHttpRequest)
+		  {
+		  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {
+		  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+			xmlhttp.open("GET","pizza.xml",false);
+			xmlhttp.send();
+			xmlDoc=xmlhttp.responseXML; 
+			txt="";	
+			itemcnt=xmlDoc.getElementsByTagName("item");
+			for(i=0;i<itemcnt.length;i++){
+				txt+="<option value="+xmlDoc.getElementsByTagName("item")[i].getAttribute("price") + " > "+ xmlDoc.getElementsByTagName("item")[i].getAttribute("name") + "</option>";
+			}
+			document.getElementById("mainmenu").innerHTML=txt;
+	</script>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<branches>	
+		<item bname="Shirdi Branch" details="Branch Details" blocation="Shirdi">Branch 1</item>
+		<item bname="Nashik Branch" details="Branch Details" blocation="Cidco Nashik">Branch 2</item>
+		<item bname="Pune Branch" details="Branch Details" blocation="Pune">Branch 3</item>
+	</branches>

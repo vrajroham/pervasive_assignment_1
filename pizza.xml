@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<items>
+		<item price="no" name="Select Menu">Select</item>
+		<item price="100" name="Pizza 1">Pizza 1</item>
+		<item price="200" name="Pizza 2">Pizza 2</item>
+		<item price="300" name="Pizza 3">Pizza 3</item>
+		<item price="400" name="Pizza 4">Pizza 4</item>
+		<item price="500" name="Pizza 5">Pizza 5</item>
+		<item price="600" name="Pizza 6">Pizza 6</item>
+		<item price="700" name="Pizza 7">Pizza 7</item>
+	</items>
